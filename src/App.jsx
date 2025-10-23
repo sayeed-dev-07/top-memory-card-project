@@ -50,9 +50,9 @@ function App() {
 
   return (
     <>
-      <div className='min-h-screen py-12 px-8 bg-[#e6e1e1bf]'>
+      <div className='min-h-screen pt-6 px-8 bg-[#e6e1e1bf]'>
         <Modal score={finalscore} bestScore={bestScore}/>
-        <div className='flex items-center justify-between flex-wrap gap-y-3'>
+        <div className='flex items-center justify-between flex-wrap gap-y-1'>
           <div className='text-black'>
             <h1 className='text-4xl font-semibold'>Sayeed's Memory Game</h1>
             <p className='text-xl mt-6 italic font-normal'>Get points by clicking on an image but don't click on any more than once!</p>
@@ -63,7 +63,7 @@ function App() {
             <p>Best Score  : {bestScore}</p>
           </div>
         </div>
-        <div className="card-container grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-x-16 mt-24 gap-y-12 items-start ">
+        <div className="card-container grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] py-2 gap-x-16 mt-10 gap-y-8 items-start ">
           {
             array.map((elem) => (
               <Card key={elem.id} name={elem.Name} url={elem.url} index={elem.id} func={handleClick}/>
