@@ -25,7 +25,7 @@ function App() {
     async function fetchData() {
       try {
         const response = await fetch(
-          'https://bobsburgers-api.herokuapp.com/characters/?limit=12&skip=563'
+          'https://bobsburgers-api.herokuapp.com/characters/?sortBy=date&OrderBy=asc&limit=12'
         );
         const data = await response.json();
 
@@ -84,7 +84,7 @@ function App() {
           </div>
         </div>
 
-        <div className="card-container grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] py-2 gap-x-16 mt-10 gap-y-8 items-stretch">
+        <div className="card-container grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] py-2 gap-x-16 mt-10 gap-y-8 items-start">
           {charData.map((elem) => (
             <Card
               key={elem.id}
