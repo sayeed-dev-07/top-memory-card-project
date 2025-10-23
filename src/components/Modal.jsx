@@ -3,6 +3,7 @@ import React from 'react';
 const Modal = ({score, bestScore}) => {
     return (
 
+            <>
             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
                     <h3 className="font-bold pb-4 text-2xl">OOPS GAME OVER!!!</h3>
@@ -16,6 +17,18 @@ const Modal = ({score, bestScore}) => {
                     </div>
                 </div>
             </dialog>
+            <dialog id="my_modal_4" className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box">
+                    <h3 className="font-bold pb-2 text-2xl">Congratulations! You Completed The Game !!!</h3>
+                    <div className="modal-action">
+                        <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+            </>
     );
 };
 

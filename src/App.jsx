@@ -20,22 +20,33 @@ function App() {
     
     return newData;
   }
-  function handleClick(propID){
-      if (!clickArr.includes(propID)) {
-        setScore(prev => prev + 1)
-        setClickArr([...clickArr, propID])
-        setArray(randomArray())
-        
-      }else{
-        if (score > bestScore) {
-          setBestScore(score)
-        }
-        setFinalScore(score)
-        document.getElementById('my_modal_5').showModal()
-        setClickArr([])
-        setScore(0)
+  function handleClick(propID) {
+  if (!clickArr.includes(propID)) {
+    const newScore = score + 1; // predict next score
+    setScore(newScore);
+    setClickArr([...clickArr, propID]);
+    setArray(randomArray());
+
+    // If user clicked all 12 cards correctly
+    if (newScore === 12) {
+      document.getElementById('my_modal_4').showModal();
+      if (newScore > bestScore) {
+        setBestScore(newScore);
       }
+      // Reset game
+      setScore(0);
+      setClickArr([]);
+    }
+
+  } else {
+    if (score > bestScore) setBestScore(score);
+    setFinalScore(score);
+    document.getElementById('my_modal_5').showModal();
+    setClickArr([]);
+    setScore(0);
   }
+}
+
 
   return (
     <>
@@ -43,7 +54,7 @@ function App() {
         <Modal score={finalscore} bestScore={bestScore}/>
         <div className='flex items-center justify-between flex-wrap gap-y-3'>
           <div className='text-black'>
-            <h1 className='text-4xl font-semibold'>Amphibia Memory Game</h1>
+            <h1 className='text-4xl font-semibold'>Sayeed's Memory Game</h1>
             <p className='text-xl mt-6 italic font-normal'>Get points by clicking on an image but don't click on any more than once!</p>
           </div>
 
