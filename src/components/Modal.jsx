@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Modal = () => {
+const Modal = ({score, bestScore}) => {
     return (
-        <div>
-            <button className = "btn" onClick = {()=> document.getElementById('my_modal_5').showModal()}> open modal</button >
+
             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
-                    <h3 className="font-bold text-lg">Hello!</h3>
-                    <p className="py-4">Press ESC key or click the button below to close</p>
+                    <h3 className="font-bold pb-4 text-2xl">OOPS GAME OVER!!!</h3>
+                    <p className=" text-xl font-semibold">Game Score : {score}</p>
+                    <p className="py-1 text-xl font-semibold">Best Score : {bestScore}</p>
                     <div className="modal-action">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
@@ -16,7 +16,6 @@ const Modal = () => {
                     </div>
                 </div>
             </dialog>
-        </div>
     );
 };
 
