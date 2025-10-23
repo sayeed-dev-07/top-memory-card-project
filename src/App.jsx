@@ -12,16 +12,12 @@ function App() {
   const [finalscore, setFinalScore] = useState(0)
 
   function randomArray() {
-    let newData = []
-    let indexes = []
-
-    while (newData.length < 12) {
-      let randomIndex = Math.floor(Math.random() * 12);
-      if (!indexes.includes(randomIndex)) {
-        newData.push(Data[randomIndex])
-        indexes.push(randomIndex)
-      }
+    let newData = [...Data]
+    for (let i = newData.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newData[i], newData[j]] = [newData[j], newData[i]]
     }
+    
     return newData;
   }
   function handleClick(propID){
@@ -59,7 +55,7 @@ function App() {
         <div className="card-container grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-x-16 mt-24 gap-y-12 items-start ">
           {
             array.map((elem) => (
-              <Card  name={elem.Name} url={elem.url} index={elem.id} func={handleClick}/>
+              <Card key={elem.id} name={elem.Name} url={elem.url} index={elem.id} func={handleClick}/>
             ))
           }
         </div>
