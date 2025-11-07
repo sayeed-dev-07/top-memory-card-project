@@ -17,7 +17,7 @@ const Modal = ({ score, bestScore }) => {
             </dialog>
             <dialog id="my_modal_4" className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
-                    <h3 className="font-bold pb-2 text-2xl">Congratulations! You Completed The Game !!!</h3>
+                    <h3 className="font-bold pb-2 text-2xl">Congratulations! You Have Completed The Game !!!</h3>
                     <div className="modal-action">
                         <form method="dialog">
                             <button className="btn">Close</button>
