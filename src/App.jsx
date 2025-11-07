@@ -2,8 +2,11 @@ import './App.css';
 import Card from './components/Card';
 import { useEffect, useState } from 'react';
 import Modal from './components/Modal';
+import { motion } from 'motion/react';
+import { div } from 'motion/react-client';
 
 function App() {
+  const [loading, setLoading] = useState(true);
   const [charData, setCharData] = useState([]);
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
@@ -22,23 +25,22 @@ function App() {
 
   // Fetch data only once when the component mounts
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          'https://bobsburgers-api.herokuapp.com/characters/?sortBy=date&OrderBy=asc&limit=12'
-        );
-        const data = await response.json();
-
-        const formattedData = data.map((item) => ({
-          id: item.id,
-          name: item.name,
-          url: item.image,
-        }));
-
-        setCharData(formattedData); 
-      } catch (err) {
-        console.error(err);
-      }
+     function fetchData() {
+      fetch('https://bobsburgers-api.herokuapp.com/characters/?sortBy=date&OrderBy=asc&limit=12')
+        .then((response) => response.json())
+        .then((data) => {
+          const formattedData = data.map((item) => ({
+            id: item.id,
+            name: item.name,
+            url: item.image,
+          }));
+          setCharData(formattedData);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+          setLoading(false);
+        });
     }
 
     fetchData();
@@ -65,6 +67,13 @@ function App() {
       setScore(0);
     }
   }
+  if(loading){
+    return (
+      <div className='min-h-screen w-full items-center justify-center'>
+        <h1 className='text-4xl font-semibold'>Loading...</h1>
+      </div>
+    )
+  }
 
   return (
     <>
@@ -84,9 +93,9 @@ function App() {
           </div>
         </div>
 
-        <div className="card-container grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] py-2 gap-x-16 mt-10 gap-y-8 items-start">
+        <motion.div animate={{ opacity: 1 , y: 0, filter: 'blur(0px)' }} initial={{ opacity: 0, y: 100, filter: 'blur(15px)' }} transition={{duration:1, type: 'spring'}}  className="card-container grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] py-2 gap-x-16 mt-10 gap-y-8 items-start">
           {charData.map((elem) => (
-            <Card
+            <Card  
               key={elem.id}
               name={elem.name}
               url={elem.url}
@@ -94,7 +103,7 @@ function App() {
               func={handleClick}
             />
           ))}
-        </div>
+        </motion.div>
       </div>
     </>
   );
